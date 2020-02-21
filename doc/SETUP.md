@@ -1,4 +1,4 @@
-# Instruction to setup the project
+# Setup
 
 ## Create the python conda env  
 This will provide you a unique list of python packages needed to run the code

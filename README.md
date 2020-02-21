@@ -1,16 +1,13 @@
-# Text Classification using NLP  
+# Creation of custom AI Platform notebook
 
 ## Introduction
- 
-## General presentation and results of this project:
+goal 
+
+## Details
 [Documentation](doc/DOC.md)
 
-## Instruction to setup the project
+## Setup
 [Configuration](doc/SETUP.md)
 
-## How run the code
+## Instructions
 [Instruction](doc/INSTRUCTION.md)
-
-## Results
-
-## Conclusion
