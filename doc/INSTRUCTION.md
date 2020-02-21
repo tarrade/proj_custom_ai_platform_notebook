@@ -39,6 +39,10 @@
   _TAG dev-v2.0.1 
 - click 'Create trigger' 
 
+# Update IAM
+- go on IAM & Admin
+- in IAM for xxx@cloudbuild.gserviceaccount.com add a new role on top of "Cloud Build Service Account" : "Deployment Manager Editor"
+
 ## To start the pipeline
 - create a tag in you Github
 - or run manually from CloudBuild by clicking 'Run trigger'
