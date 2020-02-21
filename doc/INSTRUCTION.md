@@ -11,7 +11,7 @@
   'custom-ai-platform-notebook'
   'custom-ai-platform-notebook-build-cache'
   in script/bucket_gcp/auto-shutdown-scrip.sh check/update the bucket name as above
- - in 'custom-ai-platform-notebook'upload the full folder 'scripts' (NOT scrip!)
+ - in 'custom-ai-platform-notebook'upload the full folder 'scripts' (NOT scrip, the one with 's' at the end!)
 
 ## Configure CloudBuild
 - go in GCP  CloudBuild
@@ -38,3 +38,7 @@
   _OWNER fabien  
   _TAG dev-v2.0.1 
 - click 'Create trigger' 
+
+## To start the pipeline
+- create a tag in you Github
+- or run manually from CloudBuild by clicking 'Run trigger'
