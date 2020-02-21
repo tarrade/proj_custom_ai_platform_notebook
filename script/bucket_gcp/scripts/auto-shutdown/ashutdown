@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# Number of sequential checks when the instance had utilization below the threshold.
+#COUNTER=0
+
+# If actual CPU utilization is below this threshold script will increase the counter.
+THRESHOLD_PERCENT=3
+
+# Interval between checks of the CPU utilizations.
+SLEEP_INTERVAL_SECONDS=6
+
+# How big COUNTER need to be for the script to shutdown the instance. For example,
+# if we want an instance to be stopped after 20min of idle. Each utilization probe
+# happens every 10sec (SLEEP_INTERVAL_SECONDS+2 x 2 sec average computation), therefore since there are 1200 seconds
+# in 20 min (20 * 60 = 1200) we need counter threshold to be 120 (1200 / 10).
+#HALT_THRESHOLD=360
+
+# time in second you want jupyterlab to run after the last activity above the thresold THRESHOLD_PERCENT
+DURATION=3600
+# initialize time to zero
+SECONDS=0
+
+while true; do
+    CPU_PERCENT_1=$(mpstat -P ALL 1 1 | awk '/Average:/ && $2=="all" {print $3}')
+    CPU_PERCENT_2=$(mpstat -P ALL 1 1 | awk '/Average:/ && $2=="all" {print $3}')
+    CPU_PERCENT_3=$(mpstat -P ALL 1 1 | awk '/Average:/ && $2=="all" {print $3}')
+    CPU_PERCENT_4=$(mpstat -P ALL 1 1 | awk '/Average:/ && $2=="all" {print $3}')
+    echo "cpu_measure: ${CPU_PERCENT_1}"
+    echo "cpu_measure: ${CPU_PERCENT_2}"
+    echo "cpu_measure: ${CPU_PERCENT_3}"
+    echo "cpu_measure: ${CPU_PERCENT_4}"
+    echo " "
+    
+    if (( $(echo "${CPU_PERCENT_1} < ${THRESHOLD_PERCENT}" | bc -l) )) || (( $(echo "${CPU_PERCENT_2} < ${THRESHOLD_PERCENT}" | bc -l) )) || (( $(echo "${CPU_PERCENT_3} < ${THRESHOLD_PERCENT}" | bc -l) )) || (( $(echo "${CPU_PERCENT_4} < ${THRESHOLD_PERCENT}" | bc -l) ));  then
+        #COUNTER=$((COUNTER + 1))
+        #if ! ((COUNTER% 10)); then
+        
+        #echo "VM $SECONDS secs"
+        #echo "VM modulo $((SECONDS % 10))"
+        #if ! ((SECONDS% 10)); then
+        #    #echo "VM shutdown script counter: $COUNTER"
+        #    echo "VM shutdown script: $SECONDS secs"
+        #fi
+        
+        if (( $(echo "${SECONDS} > ${DURATION}" | bc -l) )); then
+        #if (( $(echo "${COUNTER} > ${HALT_THRESHOLD}" | bc -l) )); then
+            echo "VM shutdown script: !!!!!shutdown the VM now !!!!"
+            echo "VM shutdown script: counter is $SECONDS secs above the thresold of $DURATION secs"
+            # to get the logs
+            sleep 5
+            shutdown now
+        fi
+    else
+        echo "VM shutdown script: JupyterLab is running ...."
+        echo "VM shutdown script: counter is $SECONDS secs, putting back to zero"
+        COUNTER=0
+        SECONDS=0
+    fi
+    #CPU_PERCENT=$(mpstat -P ALL 5 1 | awk '/Average:/ && $2 ~ /[0–9]/ {print $3}')
+    #echo "total_overall_cpu= $CPU_PERCENT"
+    #if (( $(echo "${CPU_PERCENT} < ${THRESHOLD_PERCENT}" | bc -l) )); then
+    #    COUNTER_BAD=0
+    #    COUNTER=$((COUNTER + 1))
+    #    if (( $(echo "${COUNTER} > ${HALT_THRESHOLD}" | bc -l) )); then
+    #        echo "!!!! VM shutdown script: shutdown the VM now !!!!"
+    #        shutdown now
+    #    fi
+    #else
+    #    COUNTER_BAD=$((COUNTER_BAD + 1))
+    #    if (( $(echo "${COUNTER_BAD} > 2" | bc -l) )); then
+    #        COUNTER=0
+    #        echo "!!!! VM shutdown script: count reset  !!!!"
+    #    fi
+    #fi
+    sleep "${SLEEP_INTERVAL_SECONDS}"
+done

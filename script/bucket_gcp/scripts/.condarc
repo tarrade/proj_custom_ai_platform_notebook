@@ -1,0 +1,13 @@
+channels:
+  - defaults
+  - conda-forge
+
+ssl_verify: false
+
+show_channel_urls: true
+
+envs_dirs:
+  - /home/.conda-env
+
+pkgs_dirs:
+  - /home/.conda-pkg
