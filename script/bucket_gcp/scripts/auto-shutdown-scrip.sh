@@ -6,8 +6,8 @@ uname -r
 
 # Installling rge auto shutdown script
 echo "copying file from gs to the VM"
-gsutil cp gs://nlp-text-classification/scripts/auto-shutdown/ashutdown /usr/local/bin/
-gsutil cp gs://nlp-text-classification/scripts/auto-shutdown/ashutdown.service /lib/systemd/system/
+gsutil cp gs://custom-ai-platform-notebook/scripts/auto-shutdown/ashutdown /usr/local/bin/
+gsutil cp gs://custom-ai-platform-notebook/scripts/auto-shutdown/ashutdown.service /lib/systemd/system/
 chmod +x /usr/local/bin/ashutdown
 ls -la /lib/systemd/system/ashutdown.service
 echo "installing sysstat bc -y -q"

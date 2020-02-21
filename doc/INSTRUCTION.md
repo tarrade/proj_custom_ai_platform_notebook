@@ -10,6 +10,8 @@
 - create 2 buckets and they should have unique names
   'custom-ai-platform-notebook'
   'custom-ai-platform-notebook-build-cache'
+  in script/bucket_gcp/auto-shutdown-scrip.sh check/update the bucket name as above
+ - in 'custom-ai-platform-notebook'upload the full folder 'scripts' (NOT scrip!)
 
 ## Configure CloudBuild
 - go in GCP  CloudBuild
