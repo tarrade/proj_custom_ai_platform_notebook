@@ -25,3 +25,7 @@ dependencies:
 - jupyterlab_code_formatter
 - pip:
     - jupyterlab_latex
+
+
+
+

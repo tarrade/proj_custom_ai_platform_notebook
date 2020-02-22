@@ -7,9 +7,9 @@
 
 ## Create  CloudStorage buckets
 - got to Storage
-- create 2 buckets and they should have unique names
-  'custom-ai-platform-notebook'
-  'custom-ai-platform-notebook-build-cache'
+- create 2 buckets and they should have unique names:  
+  'custom-ai-platform-notebook'  
+  'custom-ai-platform-notebook-build-cache'  
   in script/bucket_gcp/auto-shutdown-scrip.sh check/update the bucket name as above
  - in 'custom-ai-platform-notebook'upload the full folder 'scripts' (NOT scrip, the one with 's' at the end!)
 
@@ -27,7 +27,7 @@
 - choose a name
 - choose 'Tag' as Trigger Type
 - 'Build Configuration' choose ' Cloud Build configuration file' and write 'ci-cd/ci_cd_pipeline.yaml'
-- in 'Substitutions variable variable' click '+Add item' and all the following variables and values
+- in 'Substitutions variable variable' click '+Add item' and all the following variables and values:    
   _BUCKET custom-ai-platform-notebook (with the bucket name defined above)  
   _BUILD true  
   _CACHE_BUCKET custom-ai-platform-notebook-build-cache (with the bucket name defined above)  
@@ -41,7 +41,8 @@
 
 # Update IAM
 - go on IAM & Admin
-- in IAM for xxx@cloudbuild.gserviceaccount.com add a new role on top of "Cloud Build Service Account" : "Deployment Manager Editor"
+- in IAM for xxx@cloudbuild.gserviceaccount.com add a new role on top of "Cloud Build Service Account":  
+  "Deployment Manager Editor"
 
 ## To start the pipeline
 - create a tag in you Github
