@@ -1,5 +1,4 @@
 # Specify the base image and tag
-#FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m34
 FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m40
 
 # Checking the type of machine
@@ -65,38 +64,68 @@ RUN jupyter --paths
 ## Clean all downloaded packages
 RUN conda clean -a -y
 
-## Check for update
-RUN jupyter labextension update --all
 ### Check which extension exist
 RUN jupyter labextension list
+#Extension 'nbdime-jupyterlab' already up to date
+#Extension '@jupyter-widgets/jupyterlab-manager' already up to date
+#Extension '@jupyterlab/celltags' already up to date
+#Extension '@jupyterlab/git' already up to date
 
-RUN jupyter lab build
+## Check for update
+RUN jupyter labextension update --all
+#RUN jupyter lab build
 
 ## Update to fix issue with extension of jupyter lab
-RUN jupyter labextension install @jupyterlab/github --debug
+### already on the docker image
+#RUN jupyter labextension install nbdime-jupyterlab --debug
+#RUN jupyter labextension update @jupyter-widgets/jupyterlab-manager --debug
+#RUN jupyter labextension update @jupyterlab/celltags --debug
+
+## Important extension
+# An extension for JupyterLab which allows for live-editing of LaTeX documents.
 RUN jupyter labextension install @jupyterlab/latex --debug
-#RUN jupyter labextension install @mflevine/jupyterlab_html --debug
-#RUN jupyter labextension install jupyterlab-drawio !! issue !!
-#RUN jupyter labextension install @jupyterlab/plotly-extension !! issue !!
-#RUN jupyter labextension install jupyterlab_bokeh !! issue !!
+# A Table of Contents extension for JupyterLab
 RUN jupyter labextension install @jupyterlab/toc --debug
-RUN jupyter labextension install @aquirdturtle/collapsible_headings --debug
-RUN jupyter labextension install jupyterlab-jupytext --debug
+# Display CPU usage in status bar
 RUN jupyter labextension install jupyterlab-cpustatus --debug
+# Create Python Files from JupyterLab
 RUN jupyter labextension install jupyterlab-python-file --debug
-#RUN jupyter labextension install jupyterlab_toastify jupyterlab_conda !! issue !!
-RUN jupyter labextension install @ijmbarr/jupyterlab_spellchecker --debug
+# Jupyterlab extension that shows currently used variables and their values
 RUN jupyter labextension install @lckr/jupyterlab_variableinspector --debug
-RUN jupyter labextension install nbdime-jupyterlab --debug
-RUN jupyter labextension update @jupyter-widgets/jupyterlab-manager --debug
-RUN jupyter labextension update @jupyterlab/celltags --debug
+# Make headings collapsible like the old Jupyter notebook extension and like Mathematica notebooks
+RUN jupyter labextension install @aquirdturtle/collapsible_headings --debug
+# This is a small Jupyterlab plugin to support using various code formatter on the server side and format code cells/files in Jupyterlab
 RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter --debug
-#RUN jupyter labextension install @jupyterlab/jupyterlab-monaco  !! issue !!
-#RUN jupyter labextension install jupyterlab-flake8 !! issue !!
-RUN jupyter serverextension enable --py jupyterlab_code_formatter --debug
+# Plotly support with Jupyter Lab (3 extensions)
+# Jupyter widgets extension
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1 --no-build --debug
+# FigureWidget support
+RUN jupyter labextension install plotlywidget@1.5.1 --no-build --debug
+# and jupyterlab renderer support
+RUN jupyter labextension install jupyterlab-plotly@1.5.1 --no-build --debug
+# A JupyterLab extension for standalone integration of drawio / mxgraph into jupyterlab
+RUN jupyter labextension install jupyterlab-drawio --debug
+# A Jupyter extension for rendering Bokeh content
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager --debug
+RUN jupyter labextension install @bokeh/jupyter_bokeh --debug
+# Provides Conda environment and package access extension from within Jupyter Notebook and JupyterLab
+RUN jupyter labextension install jupyterlab_toastify jupyterlab_conda --debug
+# Jupyterlab extension to lint python notebooks and python files in the text editor. Uses flake8 python library for linting
+RUN jupyter labextension install jupyterlab-flake8 --debug
 
+## Old extensions/not so important
+# A JupyterLab extension for accessing GitHub repositories
+#RUN jupyter labextension install @jupyterlab/github --debug
+# This extension adds a few Jupytext commands to the command palette. Use these to select the desired ipynb/text pairing for your notebook
+#RUN jupyter labextension install jupyterlab-jupytext --debug
+# JupyterLab extension mimerenderer to render HTML files in IFrame Tab
+#RUN jupyter labextension install @mflevine/jupyterlab_html
+# A spell checker extension for markdown cells in jupyterlab notebooks
+#RUN jupyter labextension install @ijmbarr/jupyterlab_spellchecker
+
+
+RUN jupyter serverextension enable --py jupyterlab_code_formatter
 RUN jupyter lab build
-
 RUN jupyter labextension list
 
 # Checking more info

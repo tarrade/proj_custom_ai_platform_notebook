@@ -2,6 +2,7 @@ name: base
 channels:
 - defaults
 - conda-forge
+- bokeh
 dependencies:
 # core packages
 - nodejs
@@ -21,8 +22,12 @@ dependencies:
 - ipykernel
 - notebook
 - nb_conda_kernels
+# jupyter lab extension
+- jupyter_bokeh
+- jupyter_conda
 - jupyterlab-git
 - jupyterlab_code_formatter
+- jupyterlab-plotly-extension
 - pip:
     - jupyterlab_latex
 
