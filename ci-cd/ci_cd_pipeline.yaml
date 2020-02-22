@@ -58,22 +58,6 @@ steps:
   id: Copy base env
 
 
-- name: 'debian'
-  args: 
-  - 'cp'
-  - 'proj_custom_ai_platform_notebook/env/environment.yml'
-  - 'proj_custom_ai_platform_notebook/docker/${_DOCKERFILE}/.'
-  id: Copy env environment.yml
-
-
-- name: 'debian'
-  args:
-  - 'cp'
-  - 'proj_custom_ai_platform_notebook/env/environment_gcp.yml'
-  - 'proj_custom_ai_platform_notebook/docker/${_DOCKERFILE}/.'
-  id: Copy env old environment.yml
-
-
 # Check the config of Docker
 - name: 'gcr.io/cloud-builders/docker'
   args:
