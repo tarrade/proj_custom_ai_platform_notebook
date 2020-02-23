@@ -5,7 +5,7 @@ channels:
 - bokeh
 dependencies:
 # core packages
-- nodejs
+- nodejs=13.9.0
 - pip
 - nbdime
 # code audit
@@ -18,7 +18,7 @@ dependencies:
 - flake8
 - black
 # notebook packages
-- jupyterlab
+- jupyterlab=1.2.6
 - ipykernel
 - notebook
 - nb_conda_kernels

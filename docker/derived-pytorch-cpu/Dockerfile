@@ -72,6 +72,7 @@ RUN jupyter labextension list
 #Extension '@jupyterlab/git' already up to date
 
 ## Check for update
+RUN jupyter lab clean
 RUN jupyter labextension update --all
 RUN jupyter lab build
 
