@@ -73,7 +73,7 @@ RUN jupyter labextension list
 
 ## Check for update
 RUN jupyter labextension update --all
-#RUN jupyter lab build
+RUN jupyter lab build
 
 ## Update to fix issue with extension of jupyter lab
 ### already on the docker image
