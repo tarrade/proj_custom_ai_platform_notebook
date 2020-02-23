@@ -105,7 +105,6 @@ RUN jupyter labextension install plotlywidget@1.5.1 --no-build --debug
 # and jupyterlab renderer support
 RUN jupyter labextension install jupyterlab-plotly@1.5.1 --no-build --debug
 # A Jupyter extension for rendering Bokeh content
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager --debug
 RUN jupyter labextension install @bokeh/jupyter_bokeh --debug
 # Provides Conda environment and package access extension from within Jupyter Notebook and JupyterLab
 RUN jupyter labextension install jupyterlab_toastify jupyterlab_conda --debug
