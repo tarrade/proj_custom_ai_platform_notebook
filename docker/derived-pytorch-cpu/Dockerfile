@@ -96,7 +96,7 @@ RUN jupyter labextension install @lckr/jupyterlab_variableinspector --debug
 # Make headings collapsible like the old Jupyter notebook extension and like Mathematica notebooks
 RUN jupyter labextension install @aquirdturtle/collapsible_headings --debug
 # This is a small Jupyterlab plugin to support using various code formatter on the server side and format code cells/files in Jupyterlab
-RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter --debug
+RUN jupyter labextension inst26/jupyterlab_code_formatter --debugall @ryantam6
 # Plotly support with Jupyter Lab (3 extensions)
 # Jupyter widgets extension
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1 --no-build --debug
@@ -104,8 +104,6 @@ RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1 --no-bu
 RUN jupyter labextension install plotlywidget@1.5.1 --no-build --debug
 # and jupyterlab renderer support
 RUN jupyter labextension install jupyterlab-plotly@1.5.1 --no-build --debug
-# A JupyterLab extension for standalone integration of drawio / mxgraph into jupyterlab
-RUN jupyter labextension install jupyterlab-drawio --debug
 # A Jupyter extension for rendering Bokeh content
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager --debug
 RUN jupyter labextension install @bokeh/jupyter_bokeh --debug
@@ -123,6 +121,8 @@ RUN jupyter labextension install jupyterlab-flake8 --debug
 #RUN jupyter labextension install @mflevine/jupyterlab_html
 # A spell checker extension for markdown cells in jupyterlab notebooks
 #RUN jupyter labextension install @ijmbarr/jupyterlab_spellchecker
+# A JupyterLab extension for standalone integration of drawio / mxgraph into jupyterlab
+#RUN jupyter labextension install jupyterlab-drawio --debug
 
 
 RUN jupyter serverextension enable --py jupyterlab_code_formatter
