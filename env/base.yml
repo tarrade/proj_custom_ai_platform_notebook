@@ -2,34 +2,32 @@ name: base
 channels:
 - defaults
 - conda-forge
-- bokeh
+#- bokeh
 dependencies:
 # core packages
 - nodejs=13.9.0
-- pip
-- nbdime
+- pip=20.0.2
+- nbdime=1.1.0
 # code audit
-- watermark
-- pylint
-- pytest
-- autopep8
-- pep8
-- pylama
-- flake8
-- black
+- watermark=1.6.1
+- pylint=2.4.4
+- pytest=5.3.5
+- autopep8=1.5
+- pep8=1.7.1
+- pylama=7.7.1
+- flake8=3.7.9
+- black=19.3b0
 # notebook packages
 - jupyterlab=1.2.6
-- ipykernel
-- notebook
-- nb_conda_kernels
+- ipykernel=5.1.4
+- notebook=6.0.3
+- nb_conda_kernels=2.2.2
 # jupyter lab extension
-- jupyter_bokeh
-- jupyter_conda
-- jupyterlab-git
-- jupyterlab_code_formatter
-- jupyterlab-plotly-extension
+- jupyter_conda=3.1.1
+- jupyterlab-git=0.9.0
+- jupyterlab_code_formatter=1.1.0
 - pip:
-    - jupyterlab_latex
+    - jupyterlab_latex==1.0.0
 
 
 
