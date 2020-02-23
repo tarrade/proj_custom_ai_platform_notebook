@@ -96,7 +96,7 @@ RUN jupyter labextension install @lckr/jupyterlab_variableinspector --debug
 # Make headings collapsible like the old Jupyter notebook extension and like Mathematica notebooks
 RUN jupyter labextension install @aquirdturtle/collapsible_headings --debug
 # This is a small Jupyterlab plugin to support using various code formatter on the server side and format code cells/files in Jupyterlab
-RUN jupyter labextension inst26/jupyterlab_code_formatter --debugall @ryantam6
+RUN jupyter labextension inst26/jupyterlab_code_formatter @ryantam6 --debug
 # Plotly support with Jupyter Lab (3 extensions)
 # Jupyter widgets extension
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1 --no-build --debug
