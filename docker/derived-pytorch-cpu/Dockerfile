@@ -66,7 +66,15 @@ RUN jupyter --paths
 RUN conda clean -a -y
 
 # Activate conda
-RUN conda init bash && . /root/.bashrc  && conda activate jupyter-notebook && conda info -e
+RUN conda init bash && . /root/.bashrc  && conda info -e
+
+# set the right permission
+RUN chmod +x /entrypoint.sh
+# Copy env if they exist from /root to /home
+RUN sed -i '1 a cp -r /root/.conda-env/env* /home/.conda-env/.' /entrypoint.sh
+RUN sed -i 's/conda activate base/conda activate jupyter-notebook/g' /entrypoint.sh
+RUN cat  /entrypoint.sh
+CMD /entrypoint.sh
 
 ### Check which extension exist
 RUN jupyter labextension list
@@ -143,9 +151,6 @@ RUN cat /etc/group
 # Running some checks
 RUN echo $HOME
 
-# set the right permission
-RUN chmod +x /entrypoint.sh
-
 # Activate conda
 #RUN conda init bash && . /root/.bashrc && conda info -e # && conda activate base
 
@@ -175,11 +180,6 @@ RUN git config --list
 #ADD known_hosts /root/.ssh/known_hosts
 #ADD id_rsa /root/.ssh/id_rsa
 #ADD config /root/.ssh/config
-
-# Copy env if they exist from /root to /home
-RUN sed -i '1 a cp -r /root/.conda-env/env* /home/.conda-env/.' /entrypoint.sh
-RUN sed -i 's/conda activate base/conda activate jupyter-notebook/g' /entrypoint.sh
-RUN cat  /entrypoint.sh
 
 # Running some checks about kernels
 RUN sed -i '1 a if [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nfi\njupyter serverextension list\nconda info\nconda list nb_conda_kernels\nconda env list\nprintenv' /run_jupyter.sh
