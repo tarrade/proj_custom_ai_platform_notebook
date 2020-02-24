@@ -3,6 +3,7 @@ channels:
 - defaults
 - conda-forge
 dependencies:
+- python=3.7.6
 # core packages
 - nodejs=13.9.0
 - pip=20.0.2
