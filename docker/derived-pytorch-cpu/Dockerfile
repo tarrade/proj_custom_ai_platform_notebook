@@ -36,10 +36,11 @@ RUN conda config --add channels conda-forge
 RUN conda config --add envs_dirs /root/.conda-env/
 
 # Update conda envs
-RUN conda env update --file base.yml
+#RUN conda env update --file base.yml
+
 
 # Create env if needed
-#RUN conda env create -f environment.yml
+RUN conda env create -f base.yml
 
 # Checking configuration and new created envs
 RUN conda config --show
@@ -63,6 +64,8 @@ RUN jupyter --paths
 
 ## Clean all downloaded packages
 RUN conda clean -a -y
+
+RUN conda activate jupyter-notebook
 
 ### Check which extension exist
 RUN jupyter labextension list
