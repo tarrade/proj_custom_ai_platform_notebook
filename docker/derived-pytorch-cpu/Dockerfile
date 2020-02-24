@@ -66,7 +66,7 @@ RUN jupyter --paths
 RUN conda clean -a -y
 
 # Activate conda
-RUN conda init bash && . /root/.bashrc && conda info -e # && conda activate jupyter-notebook
+RUN conda init bash && . /root/.bashrc  && conda activate jupyter-notebook && conda info -e
 
 ### Check which extension exist
 RUN jupyter labextension list
