@@ -65,7 +65,8 @@ RUN jupyter --paths
 ## Clean all downloaded packages
 RUN conda clean -a -y
 
-RUN conda activate jupyter-notebook
+# Activate conda
+RUN conda init bash && . /root/.bashrc && conda info -e # && conda activate jupyter-notebook
 
 ### Check which extension exist
 RUN jupyter labextension list
@@ -146,7 +147,7 @@ RUN echo $HOME
 RUN chmod +x /entrypoint.sh
 
 # Activate conda
-RUN conda init bash && . /root/.bashrc && conda info -e # && conda activate base
+#RUN conda init bash && . /root/.bashrc && conda info -e # && conda activate base
 
 ## !!!!
 ## !!!! NO pip, conda, git command below because of proxy config !!!!
@@ -177,6 +178,7 @@ RUN git config --list
 
 # Copy env if they exist from /root to /home
 RUN sed -i '1 a cp -r /root/.conda-env/env* /home/.conda-env/.' /entrypoint.sh
+RUN sed -i 's/conda activate base/conda activate jupyter-notebook/g' /entrypoint.sh
 RUN cat  /entrypoint.sh
 
 # Running some checks about kernels
