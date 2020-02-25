@@ -37,10 +37,6 @@ RUN mkdir -p /home/.jupyter_autosave/
 RUN conda config --add channels conda-forge
 RUN conda config --add envs_dirs /root/.conda-env/
 
-# Update conda envs
-#RUN conda env update --file base.yml
-
-
 # Create env if needed
 RUN conda env create -f base.yml
 
@@ -69,38 +65,15 @@ RUN conda clean -a -y
 
 # Activate conda
 RUN conda init bash
-#RUN . /root/.bashrc
 RUN conda info -e
-#RUN echo "conda activate jupyter-notebook" > /root/.bashrc
 SHELL ["conda", "run", "-n", "jupyter-notebook", "/bin/bash", "-c"]
-RUN conda info -e
-
-#RUN conda init bash && . /root/.bashrc && conda info -e &&  . /root/miniconda3/etc/profile.d/conda.sh && conda activate jupyter-notebook
-#RUN source /root/.bashrc
-#RUN conda init bash && conda info -e &&  . /root/miniconda3/etc/profile.d/conda.sh && conda activate jupyter-notebook
-#RUN ls -la /root/.conda-env/
-#RUN ls -la /root/miniconda3
-#RUN echo $PATH
-#ENV PATH /root/.conda-env/jupyter-notebook/bin:$PATH
-#ENV BASH_ENV /root/.bashrc
-#SHELL ["/bin/bash", "--login", "-c"]
-
-
-#RUN conda activate jupyter-notebook
-
-#CMD /entrypoint.sh
-#ENV PATH /root/.conda-env/jupyter-notebook/bin:$PATH
-#ENV ENV CONDA_DEFAULT_ENV /root/.conda-env/jupyter-notebook/bin:$PATH
-#RUN . /root/miniconda3/etc/profile.d/conda.sh &&
-#RUN conda activate jupyter-notebook
-#RUN echo "source /root/miniconda3/etc/profile.d/conda.sh"
-#RUN echo "conda activate jupyter-notebook" >> $HOME/.bashrc
-#RUN .  /root/.bashrc
-
-#RUN conda activate jupyter-notebook
 
 # Check which env is activated
-#RUN conda info -e
+RUN conda info -e
+
+# Not working
+#RUN conda init bash && conda info -e &&  . /root/miniconda3/etc/profile.d/conda.sh && conda activate jupyter-notebook
+#RUN conda activate jupyter-notebook
 
 ### Check which extension exist
 RUN jupyter labextension list
@@ -197,9 +170,6 @@ RUN cat  /entrypoint.sh
 ADD .condarc /.condarc
 ENV CONDARC /.condarc
 
-# drop local conda-env canal
-RUN conda config --remove envs_dirs /root/.conda-env/
-
 # Setup the proxy server for pip
 ADD pip.conf /pip.conf
 ENV PIP_CONFIG_FILE /pip.conf
@@ -233,6 +203,9 @@ RUN cat /etc/skel/.profile
 # Add execution of custom scripts it is exists
 RUN sed -i -e "\$aif [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nfi\n" /root/.bashrc
 RUN cat /root/.bashrc
+
+# drop local conda-env canal (at the very end to avoid clashes)
+RUN conda config --remove envs_dirs /root/.conda-env/
 
 # Define entry points
 ENTRYPOINT ["/entrypoint.sh", "/run_jupyter.sh"]
