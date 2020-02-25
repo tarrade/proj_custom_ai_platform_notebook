@@ -28,15 +28,13 @@ ADD base.yml base.yml
 RUN conda update -n base conda -y
 
 # Define a folder to store env
-RUN mkdir -p /root/.conda-env/
+#RUN mkdir -p /root/.conda-env/
 RUN mkdir -p /home/.conda-env/
 RUN mkdir -p /home/.conda-pkg/
 RUN mkdir -p /home/.jupyter_autosave/
 
 # Create config files
 RUN conda config --add channels conda-forge
-RUN conda config --add envs_dirs /root/.conda-env/
-
 # Create env if needed
 RUN conda env create -f base.yml
 
@@ -50,7 +48,7 @@ RUN conda info -e
 RUN conda env list
 RUN conda list
 
-RUN ls -la /root/.conda-env/
+#RUN ls -la /root/.conda-env/
 
 # checking display conda env in notebook
 RUN conda list nb_conda_kernels
@@ -186,17 +184,18 @@ RUN cat  /run_jupyter.sh
 RUN cat /root/.jupyter/jupyter_notebook_config.py
 RUN sed -i -e "\$ac.NotebookApp.kernel_spec_manager_class = 'nb_conda_kernels.manager.CondaKernelSpecManager'" /root/.jupyter/jupyter_notebook_config.py
 RUN sed -i -e "\$ac.ContentsManager.allow_hidden = True" /root/.jupyter/jupyter_notebook_config.py
-RUN sed -i -e "\$ac.NotebookApp.notebook_dir = '/home'" /root/.jupyter/jupyter_notebook_config.py
+#RUN sed -i -e "\$ac.NotebookApp.notebook_dir = '/home'" /root/.jupyter/jupyter_notebook_config.py
 RUN sed -i -e "\$ac.FileCheckpoints.checkpoint_dir = '/home/.jupyter_autosave'" /root/.jupyter/jupyter_notebook_config.py
 RUN cat /root/.jupyter/jupyter_notebook_config.py
 
 # Set the right permission
 RUN chmod +x /entrypoint.sh
 # Copy env if they exist from /root to /home
-RUN sed -i '1 a conda info -e' /entrypoint.sh
+RUN sed -i '1 a conda info' /entrypoint.sh
 RUN sed -i '1 a conda info --envs' /entrypoint.sh
-RUN sed -i '1 a cp -r /root/.conda-env/env* /home/.conda-env/.' /entrypoint.sh
+#RUN sed -i '1 a cp -r /root/.conda-env/* /home/.conda-env/.' /entrypoint.sh
 RUN sed -i 's/conda activate base/conda activate jupyter-notebook/g' /entrypoint.sh
+RUN sed -i -e '\$aconda config --remove envs_dirs /root/.conda/envs'
 RUN cat  /entrypoint.sh
 
 # Add execution of custom scripts it is exists
@@ -208,7 +207,10 @@ RUN sed -i -e "\$aif [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nf
 RUN cat /root/.bashrc
 
 # drop local conda-env canal (at the very end to avoid clashes)
-RUN conda config --remove envs_dirs /root/.conda-env/
+#RUN conda config --remove envs_dirs /root/.conda-env/
+#RUN conda config --add envs_dirs /root/.conda-env/
+#RUN conda config --remove envs_dirs /root/.conda/envs
+RUN conda info
 
 # Define entry points
 ENTRYPOINT ["/entrypoint.sh", "/run_jupyter.sh"]
