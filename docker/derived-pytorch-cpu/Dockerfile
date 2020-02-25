@@ -1,6 +1,16 @@
 # Specify the base image and tag
 FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m40
 
+# Checking that the right shell is used in the image the build and later when the container is launched from the image
+RUN echo $0
+# active in the shell
+SHELL ["/bin/bash", "-c"]
+#SHELL ["/bin/bash", "--login", "-c"]
+
+# active in the terminla later
+#ENV SHELL /bin/bash
+RUN echo $0
+
 # Checking the type of machine
 RUN cat /etc/os-release
 RUN lsb_release -a
@@ -9,14 +19,6 @@ RUN uname -r
 # Install htop
 RUN apt-get update
 RUN apt-get install htop
-
-# Checking that the right shell is used in the image the build and later when the container is launched from the image
-RUN echo $0
-# active in the shell
-SHELL ["/bin/bash", "-c"]
-# active in the terminla later
-ENV SHELL /bin/bash
-RUN echo $0
 
 ## Creating conda env
 # Adding the environment files in the docker image
@@ -66,21 +68,51 @@ RUN jupyter --paths
 RUN conda clean -a -y
 
 # Activate conda
-RUN conda init bash && . /root/.bashrc  && conda info -e
+RUN conda init bash
+#RUN . /root/.bashrc
+RUN conda info -e
+#RUN echo "conda activate jupyter-notebook" > /root/.bashrc
+SHELL ["conda", "run", "-n", "jupyter-notebook", "/bin/bash", "-c"]
+RUN conda info -e
 
-# set the right permission
-RUN chmod +x /entrypoint.sh
-# Copy env if they exist from /root to /home
-RUN sed -i '1 a cp -r /root/.conda-env/env* /home/.conda-env/.' /entrypoint.sh
-RUN sed -i 's/conda activate base/conda activate jupyter-notebook/g' /entrypoint.sh
-RUN cat  /entrypoint.sh
-CMD /entrypoint.sh
+#RUN conda init bash && . /root/.bashrc && conda info -e &&  . /root/miniconda3/etc/profile.d/conda.sh && conda activate jupyter-notebook
+#RUN source /root/.bashrc
+#RUN conda init bash && conda info -e &&  . /root/miniconda3/etc/profile.d/conda.sh && conda activate jupyter-notebook
+#RUN ls -la /root/.conda-env/
+#RUN ls -la /root/miniconda3
+#RUN echo $PATH
+#ENV PATH /root/.conda-env/jupyter-notebook/bin:$PATH
+#ENV BASH_ENV /root/.bashrc
+#SHELL ["/bin/bash", "--login", "-c"]
+
+
+#RUN conda activate jupyter-notebook
+
+#CMD /entrypoint.sh
+#ENV PATH /root/.conda-env/jupyter-notebook/bin:$PATH
+#ENV ENV CONDA_DEFAULT_ENV /root/.conda-env/jupyter-notebook/bin:$PATH
+#RUN . /root/miniconda3/etc/profile.d/conda.sh &&
+#RUN conda activate jupyter-notebook
+#RUN echo "source /root/miniconda3/etc/profile.d/conda.sh"
+#RUN echo "conda activate jupyter-notebook" >> $HOME/.bashrc
+#RUN .  /root/.bashrc
+
+#RUN conda activate jupyter-notebook
+
+# Check which env is activated
+#RUN conda info -e
 
 ### Check which extension exist
 RUN jupyter labextension list
+
+# in the base
 #Extension 'nbdime-jupyterlab' already up to date
 #Extension '@jupyter-widgets/jupyterlab-manager' already up to date
 #Extension '@jupyterlab/celltags' already up to date
+#Extension '@jupyterlab/git' already up to date
+
+# in the jupyter notebook env
+#Extension 'nbdime-jupyterlab' already up to date
 #Extension '@jupyterlab/git' already up to date
 
 ## Check for update
@@ -89,12 +121,10 @@ RUN jupyter labextension update --all
 RUN jupyter lab build
 
 ## Update to fix issue with extension of jupyter lab
-### already on the docker image
-#RUN jupyter labextension install nbdime-jupyterlab --debug
-#RUN jupyter labextension update @jupyter-widgets/jupyterlab-manager --debug
-#RUN jupyter labextension update @jupyterlab/celltags --debug
 
 ## Important extension
+# The JupyterLab cell tags extension enables users to easily add, view, and manipulate descriptive tags for notebook cells. Will be merged in core.
+RUN jupyter labextension install @jupyterlab/celltags --debug
 # An extension for JupyterLab which allows for live-editing of LaTeX documents.
 RUN jupyter labextension install @jupyterlab/latex --debug
 # A Table of Contents extension for JupyterLab
@@ -151,8 +181,12 @@ RUN cat /etc/group
 # Running some checks
 RUN echo $HOME
 
-# Activate conda
-#RUN conda init bash && . /root/.bashrc && conda info -e # && conda activate base
+# Set the right permission
+RUN chmod +x /entrypoint.sh
+# Copy env if they exist from /root to /home
+RUN sed -i '1 a cp -r /root/.conda-env/env* /home/.conda-env/.' /entrypoint.sh
+RUN sed -i 's/conda activate base/conda activate jupyter-notebook/g' /entrypoint.sh
+RUN cat  /entrypoint.sh
 
 ## !!!!
 ## !!!! NO pip, conda, git command below because of proxy config !!!!
