@@ -97,27 +97,27 @@ RUN jupyter lab build
 
 ## Important extension
 # The JupyterLab cell tags extension enables users to easily add, view, and manipulate descriptive tags for notebook cells. Will be merged in core.
-RUN jupyter labextension install @jupyterlab/celltags --debug
+#RUN jupyter labextension install @jupyterlab/celltags --debug
 # An extension for JupyterLab which allows for live-editing of LaTeX documents.
-RUN jupyter labextension install @jupyterlab/latex --debug
+#RUN jupyter labextension install @jupyterlab/latex --debug
 # A Table of Contents extension for JupyterLab
-RUN jupyter labextension install @jupyterlab/toc --debug
+#RUN jupyter labextension install @jupyterlab/toc --debug
 # Display CPU usage in status bar
-RUN jupyter labextension install jupyterlab-cpustatus --debug
+#RUN jupyter labextension install jupyterlab-cpustatus --debug
 # Create Python Files from JupyterLab
-RUN jupyter labextension install jupyterlab-python-file --debug
+#RUN jupyter labextension install jupyterlab-python-file --debug
 # Jupyterlab extension that shows currently used variables and their values
-RUN jupyter labextension install @lckr/jupyterlab_variableinspector --debug
+#RUN jupyter labextension install @lckr/jupyterlab_variableinspector --debug
 # Make headings collapsible like the old Jupyter notebook extension and like Mathematica notebooks
-RUN jupyter labextension install @aquirdturtle/collapsible_headings --debug
+#RUN jupyter labextension install @aquirdturtle/collapsible_headings --debug
 # This is a small Jupyterlab plugin to support using various code formatter on the server side and format code cells/files in Jupyterlab
-RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter --debug
+#RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter --debug
 # Provides Conda environment and package access extension from within Jupyter Notebook and JupyterLab
-RUN jupyter labextension install jupyterlab_toastify jupyterlab_conda --debug
+#RUN jupyter labextension install jupyterlab_toastify jupyterlab_conda --debug
 # Jupyterlab extension to lint python notebooks and python files in the text editor. Uses flake8 python library for linting
-RUN jupyter labextension install jupyterlab-flake8 --debug
+#RUN jupyter labextension install jupyterlab-flake8 --debug
 # Jupyter widgets extension
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager --debug
+#RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager --debug
 
 ## Old extensions/not so important
 # A JupyterLab extension for accessing GitHub repositories
@@ -154,13 +154,6 @@ RUN cat /etc/group
 # Running some checks
 RUN echo $HOME
 
-# Set the right permission
-RUN chmod +x /entrypoint.sh
-# Copy env if they exist from /root to /home
-RUN sed -i '1 a cp -r /root/.conda-env/env* /home/.conda-env/.' /entrypoint.sh
-RUN sed -i 's/conda activate base/conda activate jupyter-notebook/g' /entrypoint.sh
-RUN cat  /entrypoint.sh
-
 ## !!!!
 ## !!!! NO pip, conda, git command below because of proxy config !!!!
 ## !!!!
@@ -190,11 +183,21 @@ RUN sed -i '1 a if [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nfi\
 RUN cat  /run_jupyter.sh
 
 # Adding option in jupyter notebook: display conda env, display hidden files
+RUN cat /root/.jupyter/jupyter_notebook_config.py
 RUN sed -i -e "\$ac.NotebookApp.kernel_spec_manager_class = 'nb_conda_kernels.manager.CondaKernelSpecManager'" /root/.jupyter/jupyter_notebook_config.py
 RUN sed -i -e "\$ac.ContentsManager.allow_hidden = True" /root/.jupyter/jupyter_notebook_config.py
 RUN sed -i -e "\$ac.NotebookApp.notebook_dir = '/home'" /root/.jupyter/jupyter_notebook_config.py
 RUN sed -i -e "\$ac.FileCheckpoints.checkpoint_dir = '/home/.jupyter_autosave'" /root/.jupyter/jupyter_notebook_config.py
 RUN cat /root/.jupyter/jupyter_notebook_config.py
+
+# Set the right permission
+RUN chmod +x /entrypoint.sh
+# Copy env if they exist from /root to /home
+RUN sed -i '1 a conda info -e' /entrypoint.sh
+RUN sed -i '1 a conda info --envs' /entrypoint.sh
+RUN sed -i '1 a cp -r /root/.conda-env/env* /home/.conda-env/.' /entrypoint.sh
+RUN sed -i 's/conda activate base/conda activate jupyter-notebook/g' /entrypoint.sh
+RUN cat  /entrypoint.sh
 
 # Add execution of custom scripts it is exists
 RUN sed -i -e "\$aif [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nfi\n" /etc/skel/.profile

@@ -1,4 +1,4 @@
-name: jupyter-notebook #base
+name: jupyter-notebook
 channels:
 - defaults
 - conda-forge
