@@ -141,11 +141,10 @@ RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build 
 # Building
 RUN jupyter lab build --debug
 
-# Chekcing full list
+# Checking full list
 RUN jupyter labextension list
 
 RUN jupyter serverextension enable --py jupyterlab_code_formatter
-
 
 # Checking more info
 RUN id
