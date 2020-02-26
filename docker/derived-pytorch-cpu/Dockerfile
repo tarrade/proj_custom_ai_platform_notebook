@@ -5,7 +5,6 @@ FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m40
 RUN echo $0
 # active in the shell
 SHELL ["/bin/bash", "-c"]
-#SHELL ["/bin/bash", "--login", "-c"]
 
 # active in the terminla later
 #ENV SHELL /bin/bash
@@ -220,7 +219,6 @@ RUN cat /root/.bashrc
 # drop local conda-env canal (at the very end to avoid clashes)
 #RUN conda config --remove envs_dirs /root/.conda-env/
 #RUN conda config --add envs_dirs /root/.conda-env/
-#RUN conda config --remove envs_dirs /root/.conda/envs
 RUN conda info
 
 # Define entry points
