@@ -69,6 +69,13 @@ SHELL ["conda", "run", "-n", "jupyter-notebook", "/bin/bash", "-c"]
 # Check which env is activated
 RUN conda info -e
 
+# Trick to fix an issue with Black and temp folders that are created too late: 19.10b0
+RUN python -c "import logging; logging.basicConfig(level=logging.INFO); import black"
+RUN touch /black.py
+RUN sed -i "import pandas as pd\nprint(pd.__version__)"  /black.py
+RUN black /black.py
+RUN python -c "import logging; logging.basicConfig(level=logging.INFO); import black"
+
 # Not working
 #RUN conda init bash && conda info -e &&  . /root/miniconda3/etc/profile.d/conda.sh && conda activate jupyter-notebook
 #RUN conda activate jupyter-notebook
