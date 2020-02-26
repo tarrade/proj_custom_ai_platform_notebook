@@ -186,7 +186,7 @@ RUN cat  /run_jupyter.sh
 
 # Adding option in jupyter notebook: display conda env, display hidden files
 RUN cat /root/.jupyter/jupyter_notebook_config.py
-RUN sed -i -e "\$ac.NotebookApp.kernel_spec_manager_class = 'nb_conda_kernels.manager.CondaKernelSpecManager'" /root/.jupyter/jupyter_notebook_config.py
+RUN sed -i.bak -e "\$ac.NotebookApp.kernel_spec_manager_class = \x27nb_conda_kernels.manager.CondaKernelSpecManager\x27" /root/.jupyter/jupyter_notebook_config.py
 RUN sed -i -e "\$ac.ContentsManager.allow_hidden = True" /root/.jupyter/jupyter_notebook_config.py
 #RUN sed -i.back "\$ac.NotebookApp.notebook_dir =  \x27/home \x27" /root/.jupyter/jupyter_notebook_config.py
 RUN sed -i.bak "\$ac.FileCheckpoints.checkpoint_dir = \x27/home/.jupyter_autosave\x27" /root/.jupyter/jupyter_notebook_config.py
