@@ -1,6 +1,6 @@
 # Specify the base image and tag
-#FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m40
-FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m42
+#FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m42
+FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m43
 
 # Checking that the right shell is used in the image the build and later when the container is launched from the image
 RUN echo $0
