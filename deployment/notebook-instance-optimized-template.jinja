@@ -24,7 +24,7 @@ resources:
           value: gs://{{properties["bucketName"]}}/scripts/start-up-scrip-ai-vm.sh
         - key: post-startup-script
           value: |
-            gs://{{properties["bucketName"]}}/scripts/auto-shutdown-scrip.sh
+            gs://{{properties["bucketName"]}}/scripts/post-startup-scrip-ai-vm.sh
         - key: framework
           value: {{properties["framework"]}}
         - key: proxy-mode
