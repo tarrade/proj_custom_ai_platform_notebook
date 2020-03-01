@@ -66,6 +66,8 @@ RUN conda init bash
 RUN conda info -e
 SHELL ["conda", "run", "-n", "jupyter-notebook", "/bin/bash", "-c"]
 
+ENV DL_ANACONDA_HOME /opt/conda/envs/jupyter-notebook
+
 # Check which env is activated
 RUN conda info -e
 
@@ -187,8 +189,8 @@ RUN git config --list
 #ADD config /root/.ssh/config
 
 # Running some checks about kernels
-RUN sed -i '1 a if [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nfi\njupyter serverextension list\nconda info\nconda list nb_conda_kernels\nconda env list\nprintenv\nconda info -e\njupyter labextension list' /run_jupyter.sh
-RUN sed -i "s+/root/miniconda3/bin/++g"  /run_jupyter.sh
+RUN sed -i '1 a if [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nfi\njupyter serverextension list\nconda info\nconda list nb_conda_kernels\nconda env list\nprintenv\nconda info -e\njupyter labextension list\nprintenv' /run_jupyter.sh
+#RUN sed -i "s+/root/miniconda3/bin/++g"  /run_jupyter.sh
 RUN cat  /run_jupyter.sh
 
 # Adding option in jupyter notebook: display conda env, display hidden files
@@ -202,9 +204,10 @@ RUN cat /root/.jupyter/jupyter_notebook_config.py
 # Set the right permission
 RUN chmod +x /entrypoint.sh
 # Copy env if they exist from /root to /home
-RUN sed -i "1 a conda config --remove envs_dirs /root/.conda/envs" /entrypoint.sh
+#RUN sed -i "1 a conda config --remove envs_dirs /root/.conda/envs" /entrypoint.sh
 RUN sed -i "1 a conda info" /entrypoint.sh
 RUN sed -i "1 a conda info --envs" /entrypoint.sh
+RUN sed -i "1 a printenv" /entrypoint.sh
 #RUN sed -i '1 a cp -r /root/.conda-env/* /home/.conda-env/.' /entrypoint.sh
 RUN sed -i "s/conda activate base/conda activate jupyter-notebook/g" /entrypoint.sh
 RUN cat  /entrypoint.sh
