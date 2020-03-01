@@ -21,10 +21,10 @@ resources:
     metadata:
         items:
         - key: startup-script-url
-          value: gs://{{properties["bucketName"]}}/scripts/start-up-scrip-ai-vm.sh
+          value: gs://{{properties["bucketName"]}}/scripts/start-up-script-ai-vm.sh
         - key: post-startup-script
           value: |
-            gs://{{properties["bucketName"]}}/scripts/post-startup-scrip-ai-vm.sh
+            gs://{{properties["bucketName"]}}/scripts/post-startup-script-ai-vm.sh
         - key: framework
           value: {{properties["framework"]}}
         - key: proxy-mode
