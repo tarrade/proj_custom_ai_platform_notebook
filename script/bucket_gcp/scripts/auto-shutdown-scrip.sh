@@ -4,7 +4,7 @@ cat /etc/os-release
 lsb_release -a
 uname -r
 
-# Installling rge auto shutdown script
+# Installling the auto shutdown script
 echo "copying file from gs to the VM"
 gsutil cp gs://custom-ai-platform-notebook/scripts/auto-shutdown/ashutdown /usr/local/bin/
 gsutil cp gs://custom-ai-platform-notebook/scripts/auto-shutdown/ashutdown.service /lib/systemd/system/
