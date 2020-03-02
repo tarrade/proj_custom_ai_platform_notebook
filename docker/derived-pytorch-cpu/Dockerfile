@@ -1,6 +1,13 @@
 # Specify the base image and tag
-#FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m42
-FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m43
+ARG TAG=43
+
+#FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m42 #old style image
+#FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m43 #new style image with Anaconda by default
+FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m$TAG
+
+# trick to have the tag after the from
+ARG TAG
+RUN echo m${TAG}
 
 # Checking that the right shell is used in the image the build and later when the container is launched from the image
 RUN echo $0
@@ -65,8 +72,6 @@ RUN conda clean -a -y
 RUN conda init bash
 RUN conda info -e
 SHELL ["conda", "run", "-n", "jupyter-notebook", "/bin/bash", "-c"]
-
-#ENV DL_ANACONDA_HOME /opt/conda/envs/jupyter-notebook
 
 # Check which env is activated
 RUN conda info -e
@@ -190,8 +195,9 @@ RUN git config --list
 
 # Running some checks about kernels
 RUN sed -i '1 a if [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nfi\njupyter serverextension list\nconda info\nconda list nb_conda_kernels\nconda env list\nprintenv\nconda info -e\njupyter labextension list\nprintenv' /run_jupyter.sh
-#RUN sed -i "s+/root/miniconda3/bin/++g"  /run_jupyter.sh
-RUN sed -i "s+\${DL_ANACONDA_HOME}/bin/++g"  /run_jupyter.sh
+RUN if [ ${TAG}>42 ] ; then sed -i "s+\${DL_ANACONDA_HOME}/bin/++g"  /run_jupyter.sh ; else sed -i "s+/root/miniconda3/bin/++g"  /run_jupyter.sh ; fi
+#RUN sed -i "s+/root/miniconda3/bin/++g"  /run_jupyter.sh     #m42
+#RUN sed -i "s+\${DL_ANACONDA_HOME}/bin/++g"  /run_jupyter.sh #m43
 RUN cat  /run_jupyter.sh
 
 # Adding option in jupyter notebook: display conda env, display hidden files
