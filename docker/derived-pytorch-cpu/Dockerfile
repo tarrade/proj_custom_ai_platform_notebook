@@ -66,7 +66,7 @@ RUN conda init bash
 RUN conda info -e
 SHELL ["conda", "run", "-n", "jupyter-notebook", "/bin/bash", "-c"]
 
-ENV DL_ANACONDA_HOME /opt/conda/envs/jupyter-notebook
+#ENV DL_ANACONDA_HOME /opt/conda/envs/jupyter-notebook
 
 # Check which env is activated
 RUN conda info -e
@@ -191,6 +191,7 @@ RUN git config --list
 # Running some checks about kernels
 RUN sed -i '1 a if [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nfi\njupyter serverextension list\nconda info\nconda list nb_conda_kernels\nconda env list\nprintenv\nconda info -e\njupyter labextension list\nprintenv' /run_jupyter.sh
 #RUN sed -i "s+/root/miniconda3/bin/++g"  /run_jupyter.sh
+RUN sed -i "s+\${DL_ANACONDA_HOME}/bin/++g"  /run_jupyter.sh
 RUN cat  /run_jupyter.sh
 
 # Adding option in jupyter notebook: display conda env, display hidden files
