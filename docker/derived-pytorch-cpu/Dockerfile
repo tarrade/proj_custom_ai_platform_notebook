@@ -1,5 +1,5 @@
 # Specify the base image and tag
-ARG TAG=42
+ARG TAG=43
 
 #FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m42 #old style image
 #FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m43 #new style image with Anaconda by default
