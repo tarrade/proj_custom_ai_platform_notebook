@@ -31,6 +31,8 @@ resources:
           value: project_editors
         - key: container
           value: {{properties["container"]}}
+        - key: use-shim-websockets
+          value: true
         - key: shutdown-script
           value: timeout 30 gcloud compute instances remove-metadata container-{{env["deployment"]}} --keys=proxy-url --zone {{properties["zone"]}}
         - key: title
