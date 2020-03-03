@@ -3,11 +3,11 @@
 # all post startup scripts
 echo "starting the post-startup script"
 
-# activate websocket_shim for AI Platform notebook
+# activate websocket_shim for AI Platform notebook (now done with metadat)
 # Installling the auto shutdown script
-echo "copying activate_websocket_shim_notebook.sh from gs to the VM"
-gsutil cp gs://custom-ai-platform-notebook/scripts/activate_websocket_shim_notebook.sh .
-sudo bash activate_websocket_shim_notebook.sh
+#echo "copying activate_websocket_shim_notebook.sh from gs to the VM"
+#gsutil cp gs://custom-ai-platform-notebook/scripts/activate_websocket_shim_notebook.sh .
+#sudo bash activate_websocket_shim_notebook.sh
 
 # activate auto-shutdown/ashutdown
 echo "copying auto-shutdown-scrip.sh from gs to the VM"

@@ -109,7 +109,7 @@ RUN jupyter labextension update --all
 
 ## Important extension
 # The JupyterLab cell tags extension enables users to easily add, view, and manipulate descriptive tags for notebook cells. Will be merged in core.
-RUN jupyter labextension install @jupyterlab/celltags --no-build --debug
+RUN jupyter labextension install @jupyterlab/celltags@0.2.0 --no-build --debug
 # An extension for JupyterLab which allows for live-editing of LaTeX documents.
 RUN jupyter labextension install @jupyterlab/latex --no-build  --debug
 # A Table of Contents extension for JupyterLab
