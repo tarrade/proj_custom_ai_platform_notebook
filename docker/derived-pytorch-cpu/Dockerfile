@@ -195,6 +195,13 @@ RUN git config --list
 #ADD id_rsa /root/.ssh/id_rsa
 #ADD config /root/.ssh/config
 
+# Create default black-theme
+RUN echo '{\n  "@jupyterlab/apputils-extension:themes": {\n    "theme": "JupyterLab Dark"\n  }\n}'  > ${DL_ANACONDA_HOME}/'share/jupyter/lab/settings/overrides.json'
+RUN cat ${DL_ANACONDA_HOME}/share/jupyter/lab/settings/overrides.json
+
+RUN echo '{\n  "@jupyterlab/apputils-extension:themes": {\n    "theme": "JupyterLab Dark"\n  }\n}'  > ${DL_ANACONDA_HOME}/'envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json'
+RUN cat ${DL_ANACONDA_HOME}/'envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
+
 # Running some checks about kernels
 RUN sed -i '1 a if [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nfi\njupyter serverextension list\nconda info\nconda list nb_conda_kernels\nconda env list\nprintenv\nconda info -e\njupyter labextension list\nprintenv' /run_jupyter.sh
 RUN if [ ${TAG}>42 ] ; then sed -i "s+\${DL_ANACONDA_HOME}/bin/++g"  /run_jupyter.sh ; else sed -i "s+/root/miniconda3/bin/++g"  /run_jupyter.sh ; fi
