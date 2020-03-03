@@ -75,6 +75,8 @@ SHELL ["conda", "run", "-n", "jupyter-notebook", "/bin/bash", "-c"]
 
 # Check which env is activated
 RUN conda info -e
+RUN conda info
+RUN conda list
 
 # Trick to fix an issue with Black and temp folders that are created too late: 19.10b0
 RUN python -c "import logging; logging.basicConfig(level=logging.INFO); import black"
@@ -109,7 +111,7 @@ RUN jupyter labextension update --all
 
 ## Important extension
 # The JupyterLab cell tags extension enables users to easily add, view, and manipulate descriptive tags for notebook cells. Will be merged in core.
-RUN jupyter labextension install @jupyterlab/celltags@0.2.0 --no-build --debug
+RUN jupyter labextension install @jupyterlab/celltags --no-build --debug
 # An extension for JupyterLab which allows for live-editing of LaTeX documents.
 RUN jupyter labextension install @jupyterlab/latex --no-build  --debug
 # A Table of Contents extension for JupyterLab
