@@ -196,10 +196,10 @@ RUN git config --list
 #ADD config /root/.ssh/config
 
 # Create default black-theme
-RUN echo '{\n  "@jupyterlab/apputils-extension:themes": {\n    "theme": "JupyterLab Dark"\n  }\n}'  > ${DL_ANACONDA_HOME}/'share/jupyter/lab/settings/overrides.json'
+RUN echo -e '{\n  "@jupyterlab/apputils-extension:themes": {\n    "theme": "JupyterLab Dark"\n  }\n}'  > ${DL_ANACONDA_HOME}/share/jupyter/lab/settings/overrides.json
 RUN cat ${DL_ANACONDA_HOME}/share/jupyter/lab/settings/overrides.json
 
-RUN echo '{\n  "@jupyterlab/apputils-extension:themes": {\n    "theme": "JupyterLab Dark"\n  }\n}'  > ${DL_ANACONDA_HOME}/'envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json'
+RUN echo -e  '{\n  "@jupyterlab/apputils-extension:themes": {\n    "theme": "JupyterLab Dark"\n  }\n}'  > ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
 RUN cat ${DL_ANACONDA_HOME}/'envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
 
 # Running some checks about kernels
