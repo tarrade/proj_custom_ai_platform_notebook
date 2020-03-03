@@ -18,7 +18,7 @@ dependencies:
 - flake8=3.7.9
 - black=19.10b0
 # notebook packages
-- jupyterlab=2.0.0 #conda-forge
+- jupyterlab=1.2.6
 - ipykernel=5.1.4
 - notebook=6.0.3
 - nb_conda_kernels=2.2.2
