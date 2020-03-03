@@ -237,5 +237,4 @@ RUN conda info
 # Define entry points
 ENTRYPOINT ["/entrypoint.sh", "/run_jupyter.sh"]
 
-# Don't use it
-#WORKDIR /home/
+WORKDIR /home/
