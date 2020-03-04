@@ -203,7 +203,7 @@ RUN git config --list
 #RUN ls -la ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/
 
 
-RUN echo -e '{\n  "@jupyterlab/apputils-extension:themes": {\n    "theme": "JupyterLab Dark"\n  }\n}'  > ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
+RUN echo -e "{\n  \"@jupyterlab/apputils-extension:themes\": {\n    \"theme\": \"JupyterLab Dark\"\n  }\n}"  > ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
 RUN cat ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
 RUN ls -la ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
 
