@@ -196,10 +196,16 @@ RUN git config --list
 #ADD config /root/.ssh/config
 
 # Create default black-theme
-RUN touch ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
+#RUN touch ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
 #ADD ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
-RUN sed -i '1 a {\n  "@jupyterlab/apputils-extension:themes": {\n    "theme": "JupyterLab Dark"\n  }\n}' ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
-RUN cat ${DL_ANACONDA_HOME}/'envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
+#RUN sed -i '1 a {\n  "@jupyterlab/apputils-extension:themes": {\n    "theme": "JupyterLab Dark"\n  }\n}' ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
+#RUN cat ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
+#RUN ls -la ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/
+
+
+RUN echo -e '{\n  "@jupyterlab/apputils-extension:themes": {\n    "theme": "JupyterLab Dark"\n  }\n}'  > ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
+RUN cat ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
+RUN ls -la ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
 
 # Running some checks about kernels
 RUN sed -i '1 a if [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nfi\njupyter serverextension list\nconda info\nconda list nb_conda_kernels\nconda env list\nprintenv\nconda info -e\njupyter labextension list\nprintenv' /run_jupyter.sh
