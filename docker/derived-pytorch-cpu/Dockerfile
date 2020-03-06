@@ -29,7 +29,7 @@ RUN apt-get install htop
 
 ## Creating conda env
 # Adding the environment files in the docker image
-ADD base.yml base.yml
+ADD jupyter-notebook.yaml jupyter-notebook.yaml
 
 # Update conda manager
 RUN conda update -n base conda -y
@@ -43,7 +43,7 @@ RUN mkdir -p /home/.jupyter_autosave/
 # Create config files
 RUN conda config --add channels conda-forge
 # Create env if needed
-RUN conda env create -f base.yml
+RUN conda env create -f jupyter-notebook.yaml
 
 # Checking configuration and new created envs
 RUN conda config --show

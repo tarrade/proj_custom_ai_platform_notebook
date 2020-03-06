@@ -53,7 +53,7 @@ steps:
 - name: 'debian'
   args: 
   - 'cp'
-  - 'proj_custom_ai_platform_notebook/env/base.yml'
+  - 'proj_custom_ai_platform_notebook/env/jupyter-notebook.yaml'
   - 'proj_custom_ai_platform_notebook/docker/${_DOCKERFILE}/.'
   id: Copy base env
 
