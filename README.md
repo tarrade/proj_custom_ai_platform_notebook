@@ -1,17 +1,18 @@
-# Creation of custom AI Platform notebook
+# Creation of Custom AI Platform Notebooks
 
 ## Introduction
-The goal of this Github repository is to create and deploy some custom AI Platorm Notebook on GCP.
-A derive imaged from GCP AI Platform Notebook is created with some custom Anaconda list of packages and
-Jupyter Lab extensions and default parameters. Using CI/CD pipeline with CloudBuild, a Docker image is build
-save in ContainerRegistry and deploy using DeploymentManager.
+The goal of this Github repository is to create and deploy custom AI Platform Notebooks on GCP.
+A derived image of AI Platform Notebooks is created with a custom list of Anaconda packages,
+Jupyter Lab extensions and default parameters. Hereby, a CI/CD pipeline with Cloud Build is created where a Docker image is built,
+saved in Container Registry and deployed using the Deployment Manager.
 
-## Step by step
-[Instructions](doc/INSTRUCTION.md)
+## Preparations for the Environment
+In this section, the connection to the right Github repository is made and GCP is set up properly for the pipeline.
 
-## Details
-[Documentation](doc/DOC.md)
+[Preparations](doc/INSTRUCTION.md)
 
-## Setup
-[Configuration](doc/SETUP.md)
+## Setup AI Platform Notebook
+When the GCP environment is ready, a custom AI Platform Notebook can be set up for any project with specific needs.
+
+[Notebook Configuration](doc/SETUP.md)
 
