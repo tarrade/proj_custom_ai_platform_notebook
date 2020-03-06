@@ -191,7 +191,7 @@ steps:
   args:
     - '-c'
     - 'if [ docker images -q gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG} == "" ]; then exit 1 ; fi'
-  id: Push the image in ContainerRegistry
+  id: Check if the tag of the image exist ContainerRegistry
 
 
 # Deploy (add , '--verbosity', 'debug' for more info)
