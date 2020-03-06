@@ -185,6 +185,14 @@ steps:
   args: ['-c', 'date_test=$(date -u +%Y-%m-%d-%H-%M); echo $date_test>_DATE;echo $(cat _DATE)']
   id: Create timestamp
 
+## Check if a give tag of an image exist in Container Registry with a given tag
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - 'if [ docker images -q gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG} == "" ]; then exit 1 ; fi'
+  id: Push the image in ContainerRegistry
+
 
 # Deploy (add , '--verbosity', 'debug' for more info)
 - name: 'gcr.io/cloud-builders/gcloud'
