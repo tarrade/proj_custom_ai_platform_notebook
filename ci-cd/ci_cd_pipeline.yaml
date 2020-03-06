@@ -186,7 +186,7 @@ steps:
   id: Create timestamp
 
 ## Check if a give tag of an image exist in Container Registry with a given tag
-- name: 'gcr.io/cloud-builders/docker'
+- name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args:
     - '-c'
