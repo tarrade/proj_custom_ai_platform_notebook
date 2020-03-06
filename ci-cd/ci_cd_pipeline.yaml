@@ -190,7 +190,7 @@ steps:
   entrypoint: 'bash'
   args:
     - '-c'
-    - 'tag=docker images -q gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG};if [  tag== "" ]; then exit 1 ; fi
+    - 'tag=docker images -q gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG};if [ tag== "" ]; then exit 1 ; fi'
   id: Check if the tag of the image exist ContainerRegistry
 
 
