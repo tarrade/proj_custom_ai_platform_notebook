@@ -190,7 +190,7 @@ steps:
   entrypoint: 'bash'
   args:
     - '-c'
-    - 'echo "test1"; echo gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG};tag=$(docker images -q gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG}); echo $tag; if [ "$tag" == "" ]; then echo "no tag!"; exit 1; else echo "the tag exist" ; fi'
+    - 'tag=$(gcloud container images list-tags --filter="tags:${_TAG}" --format=json gcr.io/$PROJECT_ID/${_DOCKERFILE}); echo $tag; if [ "$tag" == [] ]; then echo "no tag!"; exit 1; else echo "the tag exist" ; fi'
   id: Check if the tag of the image exist ContainerRegistry
 
 
