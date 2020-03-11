@@ -8,6 +8,10 @@ dependencies:
 - nodejs=13.9.0
 - pip=20.0.2
 - nbdime=1.1.0
+# dependency based image defined it as extension in /root/.ipython/profile_default/ipython_kernel_config.py
+- ipython-sql=0.3.9 # conda-forge
+- matplotlib=3.1.3
+- google-cloud-bigquery=1.24.0 #conda-forge
 # code audit
 - watermark=1.6.1
 - pylint=2.4.4
@@ -18,7 +22,7 @@ dependencies:
 - flake8=3.7.9
 - black=19.10b0
 # notebook packages
-- jupyterlab=1.2.6
+- jupyterlab=1.2.7 # conda-forge
 - ipykernel=5.1.4
 - notebook=6.0.3
 - nb_conda_kernels=2.2.2

@@ -121,7 +121,8 @@ RUN jupyter labextension install jupyterlab-cpustatus --no-build  --debug
 # Create Python Files from JupyterLab
 RUN jupyter labextension install jupyterlab-python-file --no-build  --debug
 # Jupyterlab extension that shows currently used variables and their values
-RUN jupyter labextension install @lckr/jupyterlab_variableinspector --no-build  --debug
+# !!! version 0.4.0 is making tf to not be working and need a import tensorflow in each cell !!!
+#RUN jupyter labextension install @lckr/jupyterlab_variableinspector --no-build  --debug
 # Make headings collapsible like the old Jupyter notebook extension and like Mathematica notebooks
 RUN jupyter labextension install @aquirdturtle/collapsible_headings --no-build  --debug
 # This is a small Jupyterlab plugin to support using various code formatter on the server side and format code cells/files in Jupyterlab
@@ -129,6 +130,7 @@ RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter --no-buil
 # Provides Conda environment and package access extension from within Jupyter Notebook and JupyterLab
 RUN jupyter labextension install jupyterlab_toastify jupyterlab_conda --no-build --debug
 # Jupyterlab extension to lint python notebooks and python files in the text editor. Uses flake8 python library for linting
+# !!! version 0.5.0 need to be deactivated on Mac -> making notebook instable abd crashing at the start !!!
 RUN jupyter labextension install jupyterlab-flake8 --no-build --debug
 # Jupyter widgets extension
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build --debug
