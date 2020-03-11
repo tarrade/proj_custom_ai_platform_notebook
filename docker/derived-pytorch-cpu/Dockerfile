@@ -202,6 +202,9 @@ RUN echo -e "{\n  \"@jupyterlab/apputils-extension:themes\": {\n    \"theme\": \
 RUN cat ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
 RUN ls -la ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
 
+# Checking some other config file from jupyter lab
+RUN cat /root/.ipython/profile_default/ipython_kernel_config.py
+
 # Running some checks about kernels
 RUN sed -i '1 a if [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nfi\njupyter serverextension list\nconda info\nconda list nb_conda_kernels\nconda env list\nprintenv\nconda info -e\njupyter labextension list\nprintenv' /run_jupyter.sh
 RUN if [ ${TAG}>42 ] ; then sed -i "s+\${DL_ANACONDA_HOME}/bin/++g"  /run_jupyter.sh ; else sed -i "s+/root/miniconda3/bin/++g"  /run_jupyter.sh ; fi
