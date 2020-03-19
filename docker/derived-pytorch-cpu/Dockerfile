@@ -130,8 +130,8 @@ RUN jupyter labextension install @ryantam626/jupyterlab_code_formatter --no-buil
 # Provides Conda environment and package access extension from within Jupyter Notebook and JupyterLab
 RUN jupyter labextension install jupyterlab_toastify jupyterlab_conda --no-build --debug
 # Jupyterlab extension to lint python notebooks and python files in the text editor. Uses flake8 python library for linting
-# !!! version 0.5.0 need to be deactivated on Mac -> making notebook instable abd crashing at the start !!!
-RUN jupyter labextension install jupyterlab-flake8 --no-build --debug
+# !!! version 0.5.0 need to be deactivated  -> making notebook instable and crashing at the start !!!
+#RUN jupyter labextension install jupyterlab-flake8 --no-build --debug
 # Jupyter widgets extension
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build --debug
 
