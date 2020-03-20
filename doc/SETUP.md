@@ -1,9 +1,10 @@
 # Setup
 
-## Create the python conda env  
-This will provide you a unique list of python packages needed to run the code
-- create a python env based on a list of packages from environment.yml  
-  ```conda env create -f env/environment.yml```  
+## Create the python conda env
+After cloning the project repository into your vm, make sure that the environment.yaml file is specified in the project's env folder with the required packages.
+These commands will provide you a unique list of python packages needed to run the code.
+- create a python env based on a list of packages from environment.yaml  
+  ```conda env create -f env/environment.yaml```  
   
  - activate the env  
   ```conda activate env_nlp_text_class```  
@@ -12,8 +13,8 @@ This will provide you a unique list of python packages needed to run the code
    ```conda clean -a -y```  
 
 ## Update or delete the python conda env  
-- update a python env based on a list of packages from environment.yml  
-  ```conda env update -f env/environment.yml```  
+- update a python env based on a list of packages from environment.yaml  
+  ```conda env update -f env/environment.yaml```  
   
 - delete the env to recreate it when too many changes are done  
   ```conda env remove -n env_nlp_text_class```  
@@ -28,7 +29,7 @@ This will provide you a unique list of python packages needed to run the code
 
 ## Use JupyterLab   
 - create the python conda env to run Jupyter Lab (or Jupyter Notebook)   
-  ```conda env create -f env/jupyter-notebook.yml```    
+  ```conda env create -f env/jupyter-notebook.yaml```    
   (you should have nodejs installed with conda)  
 
 - activate the env  
