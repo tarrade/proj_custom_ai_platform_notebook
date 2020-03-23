@@ -57,6 +57,12 @@ steps:
   - 'proj_custom_ai_platform_notebook/docker/${_DOCKERFILE}/.'
   id: Copy base env
 
+- name: 'debian'
+  args:
+  - 'cp'
+  - 'proj_custom_ai_platform_notebook/script/jupyter_lab/install_jupyterlab_extension.sh'
+  - 'proj_custom_ai_platform_notebook/docker/${_DOCKERFILE}/.'
+  id: Copy jupyter lab extensions scrip
 
 # Check the config of Docker
 - name: 'gcr.io/cloud-builders/docker'
