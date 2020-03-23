@@ -40,7 +40,7 @@ These commands will provide you a unique list of python packages needed to run t
 - activate the env  
   ```conda activate jupyter-notebook```  
   
-- install jupyter extension  
+- install jupyter lab extensions  
   execute the shell script copy and paste each line
   ```. script/jupyter_lab/install_jupyterlab_extension.sh ```
 
