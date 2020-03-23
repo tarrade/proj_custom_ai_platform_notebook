@@ -41,42 +41,8 @@ These commands will provide you a unique list of python packages needed to run t
   ```conda activate jupyter-notebook```  
   
 - install jupyter extension  
-```jupyter labextension list
-       
-    npm set strict-ssl false   
-       
-    # To see issues:   
-    jupyter labextension install @mflevine/jupyterlab_html --debug  
-      
-    jupyter labextension install @jupyterlab/github   
-    jupyter labextension install @jupyterlab/latex  
-    jupyter labextension install @mflevine/jupyterlab_html   
-    jupyter labextension install jupyterlab-drawio   
-    jupyter labextension install @jupyterlab/plotly-extension   
-    jupyter labextension install jupyterlab_bokeh   
-    jupyter labextension install @jupyterlab/toc   
-    jupyter labextension install @aquirdturtle/collapsible_headings   
-    jupyter labextension install jupyterlab-jupytext   
-    jupyter labextension install jupyterlab-cpustatus   
-    jupyter labextension install jupyterlab-python-file   
-    jupyter labextension install jupyterlab_toastify jupyterlab_conda   
-    jupyter labextension install @ijmbarr/jupyterlab_spellchecker   
-    jupyter labextension install @lckr/jupyterlab_variableinspector   
-    jupyter labextension install nbdime-jupyterlab
-    jupyter labextension install @ryantam626/jupyterlab_code_formatter
-    -- not working start --
-    jupyter labextension install @jupyterlab/jupyterlab-monaco
-    jupyter labextension install jupyterlab-flake8
-    -- not working end --
-    jupyter serverextension enable --py jupyterlab_code_formatter
-    jupyter contrib nbextension install   
-    jupyter nbextensions_configurator enable
-   
-    jupyter lab build
-
-    # you need to create this folder structure manually  
-    C:\Users\Cxxxxxx\AppData\Local\black\black\Cache\19.3b0
-```
+  execute the shell script copy and paste each line
+  ```. script/jupyter_lab/install_jupyterlab_extension.sh ```
 
 - start Jupyter Lab where is the env 'jupyter-notebook' activated  
   ```jupyter lab```  
