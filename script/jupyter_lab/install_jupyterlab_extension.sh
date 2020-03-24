@@ -44,7 +44,7 @@ jupyter labextension install jupyterlab_toastify jupyterlab_conda --no-build --d
 # Jupyter widgets extension
 jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build --debug
 # Jupyter TensorBoard extension
-#jupyter labextension install jupyterlab_tensorboard --no-build --debug
+jupyter labextension install jupyterlab_tensorboard --no-build --debug
 
 ## Old extensions/not so important
 # A JupyterLab extension for accessing GitHub repositories

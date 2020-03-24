@@ -32,7 +32,7 @@ dependencies:
 - jupyterlab_code_formatter=1.1.0
 - pip:
     - jupyterlab_latex==1.0.0
-    #- jupyter_tensorboard==0.2.0
+    - jupyter_tensorboard==0.2.0
 
 
 
