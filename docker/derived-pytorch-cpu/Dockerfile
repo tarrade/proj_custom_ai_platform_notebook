@@ -3,7 +3,10 @@ ARG TAG=43
 
 #FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m42 #old style image
 #FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m43 #new style image with Anaconda by default
-FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m$TAG
+# CPU
+#FROM gcr.io/deeplearning-platform-release/pytorch-cpu:m$TAG
+# GPU
+FROM gcr.io/deeplearning-platform-release/pytorch-gpu:m$TAG
 
 # trick to have the tag after the from
 ARG TAG
