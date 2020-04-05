@@ -1,0 +1,13 @@
+name: env_gcp_sdk
+channels:
+- defaults
+- conda-forge
+dependencies:
+  # core packages
+  - python=3.7.5
+  - pip=20.0.2
+  - pip:
+    - google-cloud-storage
+    - google-cloud-bigquery
+    - google-cloud-kms
+    - google-cloud-pubsub
