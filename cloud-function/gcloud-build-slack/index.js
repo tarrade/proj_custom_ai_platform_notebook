@@ -38,3 +38,4 @@ const createSlackMessage = (build) => {
   };
   return message;
 }
+

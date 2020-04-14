@@ -8,3 +8,5 @@ env/test.yml
 *.egg-info
 *.pyc
 test-docker
+cloud-function/gcloud-build-slack/.gcloudignore
+config.txt
