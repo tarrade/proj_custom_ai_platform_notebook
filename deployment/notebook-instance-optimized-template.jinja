@@ -18,6 +18,11 @@ resources:
       accessConfigs:
       - name: External NAT
         type: ONE_TO_ONE_NAT
+    scheduling:
+      onHostMaintenance: TERMINATE
+      automaticRestart: true
+      preemptible: false
+
     metadata:
         items:
         - key: startup-script-url
@@ -29,6 +34,8 @@ resources:
           value: {{properties["framework"]}}
         - key: proxy-mode
           value: project_editors
+        - key: install-nvidia-driver
+          value: true
         - key: container
           value: {{properties["container"]}}
         - key: use-shim-websockets
