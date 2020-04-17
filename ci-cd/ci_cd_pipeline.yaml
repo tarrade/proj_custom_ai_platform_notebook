@@ -213,7 +213,6 @@ steps:
     create \
     ${_NAME_INSTANCE}-${_OWNER}-$(date -u +%Y-%m-%d-h-%H-%M) \
     --template notebook-instance-optimized-template.jinja \
-    --maintenance-policy=TERMINATE \
     --properties \
     network:${_NETWORK},bucketName:${_BUCKET},machineTypes:${_MACHINE_TYPE},diskSizeGb:${_DISK_SIZE},container:gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG},application-version-tag:${_TAG},owner-tag:${_OWNER} \
   dir: 'proj_custom_ai_platform_notebook/deployment'
