@@ -128,11 +128,6 @@ RUN git config --list
 #ADD id_rsa /root/.ssh/id_rsa
 #ADD config /root/.ssh/config
 
-# Adding port forwarding for TensorBoard on port 6006
-#RUN sed -e "/8080:8080/a     -p 6006:6006 \\" /opt/deeplearning/bin/load_container.sh
-RUN sed -e '/8080:8080/a\    -p 6006:6006 \\' /opt/deeplearning/bin/load_container.sh
-RUN cat /opt/deeplearning/bin/load_container.sh
-
 # Create default black-theme
 RUN echo -e "{\n  \"@jupyterlab/apputils-extension:themes\": {\n    \"theme\": \"JupyterLab Dark\"\n  }\n}"  > ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
 RUN cat ${DL_ANACONDA_HOME}/envs/jupyter-notebook/share/jupyter/lab/settings/overrides.json
