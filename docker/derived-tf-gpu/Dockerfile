@@ -129,7 +129,7 @@ RUN git config --list
 #ADD config /root/.ssh/config
 
 # Adding port forwarding for TensorBoard on port 6006
-RUN sed -e "/8080:8080/a '    -p 6006:6006 \'" /opt/deeplearning/bin/load_container.sh
+RUN sed -e "/8080:8080/a     -p 6006:6006 \\" /opt/deeplearning/bin/load_container.sh
 RUN cat /opt/deeplearning/bin/load_container.sh
 
 # Create default black-theme
