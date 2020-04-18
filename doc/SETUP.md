@@ -46,4 +46,13 @@ These commands will provide you a unique list of python packages needed to run t
 
 - start Jupyter Lab where is the env 'jupyter-notebook' activated  
   ```jupyter lab```  
+  
+## TensorBoard (as of 18.04.2010)
+- open CloudShell in the GCP console  
+- execute the following command to do port forwarding  
+  ```ssh -i ~/.ssh/id_rsa -L localhost:6080:localhost:6006 user_name@external_ip```  
+- then in CloudShell, click on ```Web Preview``` and watch for port 6080  
+![alt text](./img/webpreview.png)   
+- you can check by SSH the underlying AI Platform notebook VM and after running jupyter lab execute the command below to see if the port 6006 is active  
+```netstat -vanp --tcp | grep 6006```   
 
