@@ -102,13 +102,13 @@ steps:
 #  dir: 'proj_custom_ai_platform_notebook/docker/${_DOCKERFILE}'
 
 ## Restore cache
- - name: 'gcr.io/cloud-builders/docker'
-   entrypoint: 'bash'
-   args:
-     - '-c'
-     - - 'if [ ${_BUILD} == "true" ]; then docker pull gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest || exit 0; fi'
-   id: Restore cache from container registry
-   
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - 'if [ ${_BUILD} == "true" ]; then docker pull gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest || exit 0; fi'
+  id: Restore cache from container registry
+
 ## Build docker image with the tag
 - name: 'gcr.io/cloud-builders/docker'
   entrypoint: 'bash'
