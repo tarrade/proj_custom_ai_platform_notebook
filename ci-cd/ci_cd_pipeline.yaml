@@ -101,36 +101,27 @@ steps:
 #  id: Build the Docker image
 #  dir: 'proj_custom_ai_platform_notebook/docker/${_DOCKERFILE}'
 
-
+# Restore cache
+ - name: 'gcr.io/cloud-builders/docker'
+   entrypoint: 'bash'
+   args:
+     - '-c'
+     - - 'if [ ${_BUILD} == "true" ]; then docker pull gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest || exit 0; fi'
+   id: Restore cache from container registry
+  -
 ## Build docker image with the tag
-#- name: 'gcr.io/cloud-builders/docker'
-#  args:
-#  - 'build'
-#  - '-t'
-#  - 'gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG}'
-#  - '-t'
-#  - 'gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest'
-#  - '.'
-#  id: Build the Docker image
-#  dir: 'proj_custom_ai_platform_notebook/docker/${_DOCKERFILE}'
-# Build docker image with the tag
 - name: 'gcr.io/cloud-builders/docker'
   entrypoint: 'bash'
   args:
     - '-c'
-    - 'if [ ${_BUILD} == "true" ]; then docker build -t gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG} -t gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest . ; fi'
+    - 'if [ ${_BUILD} == "true" ]; then docker build -t gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG} -t gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest --cache-from gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest . ; fi'
   id: Build the Docker image
   dir: 'proj_custom_ai_platform_notebook/docker/${_DOCKERFILE}'
+  options:
+    machineType: 'N1_HIGHCPU_8'
 
 
 ## Describe images
-#- name: 'gcr.io/cloud-builders/docker'
-#  args:
-#  - 'image'
-#  - 'inspect'
-#  - 'gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG}'
-#  id: Describe the images
-# Describe images
 - name: 'gcr.io/cloud-builders/docker'
   entrypoint: 'bash'
   args:
@@ -140,11 +131,6 @@ steps:
 
 
 ## Check sizes of the images
-#- name: 'gcr.io/cloud-builders/docker'
-#  args:
-#  - 'images'
-#  id: Check sizes of the images
-# Check sizes of the images
 - name: 'gcr.io/cloud-builders/docker'
   entrypoint: 'bash'
   args:
@@ -152,37 +138,31 @@ steps:
     - 'if [ ${_BUILD} == "true" ]; then docker images ; fi'
   id: Check sizes of the images
 
-
-## Push image in Container Registry with a tag
-#- name: 'gcr.io/cloud-builders/docker'
-#  args:
-#  - 'push'
-#  - 'gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG}'
-#  id: Push the image in ContainerRegistry
-# Push image in Container Registry with a tag
+## Push image in Container Registry with a tag and latest
 - name: 'gcr.io/cloud-builders/docker'
   entrypoint: 'bash'
   args:
     - '-c'
-    - 'if [ ${_BUILD} == "true" ]; then docker push gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG} ; fi'
+    - 'if [ ${_BUILD} == "true" ]; then docker push gcr.io/$PROJECT_ID/${_DOCKERFILE}; fi'
   id: Push the image in ContainerRegistry
+
+
+### Push image in Container Registry with a tag
+#- name: 'gcr.io/cloud-builders/docker'
+#  entrypoint: 'bash'
+#  args:
+#    - '-c'
+#    - 'if [ ${_BUILD} == "true" ]; then docker push gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG} ; fi'
+#  id: Push the image in ContainerRegistry
 
 
 ## Push image in Container Registry with the tag latest
 #- name: 'gcr.io/cloud-builders/docker'
+#  entrypoint: 'bash'
 #  args:
-#  - 'push'
-#  - 'gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest'
-#  env:
-#    - 'DOCKER_DRIVER=overlay'
+#    - '-c'
+#    - 'if [ ${_BUILD} == "true" ]; then docker push gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest ; fi'
 #  id: Push the image latest in ContainerRegistry
-# Push image in Container Registry with the tag latest
-- name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'bash'
-  args:
-    - '-c'
-    - 'if [ ${_BUILD} == "true" ]; then docker push gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest ; fi'
-  id: Push the image latest in ContainerRegistry
 
 
 # Create timestamp
@@ -221,13 +201,11 @@ steps:
 #${_OWNER}-${_NAME_INSTANCE}-$(date -u +%Y-%m-%d-%H-%M)
 #date-$(date -u +%Y-%m-%d-%H-%M)-${_NAME_INSTANCE}
 
-
 # Read timestamp
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: sh
   args: ['-c', 'echo $(cat _DATE)']
   id: Read timestamp
-
 
 # Save cache 
 #- name: 'gcr.io/$PROJECT_ID/save_cache'
@@ -239,7 +217,6 @@ steps:
 #  waitFor:
 #  - Push the image in ContainerRegistry
 #  id: Store cache in gs
-
 
 substitutions:
     _BUCKET: not-defined
