@@ -109,6 +109,7 @@ steps:
     - 'if [ ${_BUILD} == "true" ]; then docker pull gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest || exit 0; fi'
   id: Restore cache from container registry
 
+
 ## Build docker image with the tag
 - name: 'gcr.io/cloud-builders/docker'
   entrypoint: 'bash'
@@ -117,8 +118,6 @@ steps:
     - 'if [ ${_BUILD} == "true" ]; then docker build -t gcr.io/$PROJECT_ID/${_DOCKERFILE}:${_TAG} -t gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest --cache-from gcr.io/$PROJECT_ID/${_DOCKERFILE}:latest . ; fi'
   id: Build the Docker image
   dir: 'proj_custom_ai_platform_notebook/docker/${_DOCKERFILE}'
-  options:
-    machineType: 'N1_HIGHCPU_8'
 
 
 ## Describe images
@@ -230,5 +229,7 @@ substitutions:
     _CONFIG_BUCKET: none
     _BUILD: none
 
+options:
+  machineType: 'N1_HIGHCPU_8'
 
 timeout: 2h00m0s
