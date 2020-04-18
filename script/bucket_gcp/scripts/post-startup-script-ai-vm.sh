@@ -10,7 +10,7 @@ echo "starting the post-startup script"
 #sudo bash activate_websocket_shim_notebook.sh
 
 # Adding port forwarding for TensorBoard on port 6006
-echo "copying auto-shutdown-scrip.sh from gs to the VM"
+echo "copying activate_port_tensorboard.sh from gs to the VM"
 gsutil cp gs://custom-ai-platform-notebook/scripts/activate_port_tensorboard.sh .
 sudo bash activate_port_tensorboard.sh
 
