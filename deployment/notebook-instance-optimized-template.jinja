@@ -14,7 +14,7 @@ resources:
       autoDelete: true
       initializeParams:
         diskSizeGb: {{properties["diskSizeGb"]}}
-        sizeGb: {{properties["diskSizeGb"]}}
+        imageSizeGb: {{properties["diskSizeGb"]}}
         sourceImage: projects/deeplearning-platform-release/global/images/family/{{properties["image"]}}
     networkInterfaces:
     - subnetwork: projects/{{env["project"]}}/regions/{{properties["region"]}}/subnetworks/default
