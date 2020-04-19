@@ -8,7 +8,9 @@ resources:
         - deeplearning-vm
     machineType: zones/{{ properties["zone"] }}/machineTypes/{{properties["machineTypes"]}}
     disks:
-    - boot: true
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
       autoDelete: true
       initializeParams:
         diskSizeGb: {{properties["diskSizeGb"]}}
