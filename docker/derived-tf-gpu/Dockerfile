@@ -91,9 +91,9 @@ RUN python -c "import logging; logging.basicConfig(level=logging.INFO); import b
 #RUN conda activate jupyter-notebook
 
 # installing jupyter lab extension
-ADD install_jupyterlab_extension.sh install_jupyterlab_extension.sh
-RUN cat /install_jupyterlab_extension.sh
-RUN . /install_jupyterlab_extension.sh
+#ADD install_jupyterlab_extension.sh install_jupyterlab_extension.sh
+#RUN cat /install_jupyterlab_extension.sh
+#RUN . /install_jupyterlab_extension.sh
 
 # Checking more info
 RUN id
