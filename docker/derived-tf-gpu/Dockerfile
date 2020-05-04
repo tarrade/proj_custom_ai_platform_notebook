@@ -91,9 +91,9 @@ RUN python -c "import logging; logging.basicConfig(level=logging.INFO); import b
 #RUN conda activate jupyter-notebook
 
 # installing jupyter lab extension
-#ADD install_jupyterlab_extension.sh install_jupyterlab_extension.sh
-#RUN cat /install_jupyterlab_extension.sh
-#RUN . /install_jupyterlab_extension.sh
+ADD install_jupyterlab_extension.sh install_jupyterlab_extension.sh
+RUN cat /install_jupyterlab_extension.sh
+RUN . /install_jupyterlab_extension.sh
 
 # Checking more info
 RUN id
@@ -171,7 +171,7 @@ RUN sed -i -e "\$aif [ -e /home/config.sh ]\nthen\n    source /home/config.sh\nf
 RUN cat /root/.bashrc
 
 # drop local conda-env canal (at the very end to avoid clashes)
-#RUN conda config --remove envs_dirs /root/.conda-env/
+#RUN conda config --remove envs_dirs /root/.trtrtrconda-env/
 #RUN conda config --add envs_dirs /root/.conda-env/
 RUN conda info
 
