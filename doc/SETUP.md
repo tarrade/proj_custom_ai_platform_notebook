@@ -48,9 +48,20 @@ These commands will provide you a unique list of python packages needed to run t
   ```jupyter lab```  
   
 ## TensorBoard (as of 18.04.2010)
+- open a Jupyter Notebook and execute the cell with TensorBoard:
+```
+%load_ext tensorboard  
+%tensorboard  --logdir {path_tensorboad_output} \  
+--host 0.0.0.0 \ 
+--port 6006
+```  
+  or you can do the same in a Terminal  
+``` tensorboard  --logdir path_tensorboad_output --host 0.0.0.0 --port 6006 ```  
 - open CloudShell in the GCP console  
 - execute the following command to do port forwarding  
-  ```ssh -i ~/.ssh/id_rsa -L localhost:6080:localhost:6006 user_name@external_ip```  
+  ```ssh -i ~/.ssh/id_rsa -L localhost:6080:localhost:6006 user_name@external_ip```    
+ or   
+ ```gcloud compute ssh user_name@instance_name --ssh-key-file ~/.ssh/id_rsa  --project xxx --zone xxx  -- -L 6080:localhost:6006```
 - then in CloudShell, click on ```Web Preview``` and watch for port 6080  
 ![alt text](./img/webpreview.png)   
 - you can check by SSH the underlying AI Platform notebook VM and after running jupyter lab execute the command below to see if the port 6006 is active  
