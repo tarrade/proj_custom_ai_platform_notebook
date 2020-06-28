@@ -26,9 +26,14 @@ RUN cat /etc/os-release
 RUN lsb_release -a
 RUN uname -r
 
-# Install htop
+# Install some utils
 RUN apt-get update
 RUN apt-get install htop
+RUN apt-get -y install net-tools
+RUN apt-get -y install iputils-ping
+RUN apt-get -y install nano
+RUN add-apt-repository ppa:git-core/ppa
+RUN apt-get -y install git
 
 ## Creating conda env
 # Adding the environment files in the docker image
