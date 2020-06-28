@@ -26,7 +26,7 @@ RUN cat /etc/os-release
 RUN lsb_release -a
 RUN uname -r
 
-# Install some utils
+# Install some utils for linux
 RUN apt-get update
 RUN apt-get install htop
 RUN apt-get -y install net-tools
