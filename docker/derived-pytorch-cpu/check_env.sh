@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Checking input env variable:"
 echo "--> PROJECT"
 echo $PROJECT
