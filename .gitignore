@@ -10,3 +10,4 @@ env/test.yml
 test-docker
 cloud-function/gcloud-build-slack/.gcloudignore
 config.txt
+docker/derived-tf-gpu/Dockerfile_backup
